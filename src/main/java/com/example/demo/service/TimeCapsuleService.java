@@ -14,11 +14,13 @@ import java.util.List;
 public class TimeCapsuleService {
 
     @Autowired
-    private TimeCapsuleRepository timeCapsuleRepository;
+    private TimeCapsuleRepository timeCapsuleRepository; // Inject your TimeCapsuleRepository
 
     @Autowired
-    private UserRepository userRepository; // Add a repository for User
-    // Create a new time capsule
+    private UserRepository userRepository; // Inject your UserRepository
+    @Autowired
+    private UserService userService;
+
     public void createTimeCapsule(Long userId, String encryptedMessage) {
         if (userId == null) {
             throw new IllegalArgumentException("User ID must not be null");
@@ -31,12 +33,11 @@ public class TimeCapsuleService {
         timeCapsule.setEncryptedMessage(encryptedMessage);
         timeCapsule.setUser(user);
 
-        timeCapsuleRepository.save(timeCapsule);
+        timeCapsuleRepository.save(timeCapsule); // Save the time capsule
     }
 
-    // Retrieve time capsules for a specific user
     public List<TimeCapsule> getTimeCapsules(Long userId) {
-        // Fetch time capsules from the repository
-        return timeCapsuleRepository.findByUserId(userId);
+        // Implement your logic to get time capsules for the user
+        return timeCapsuleRepository.findByUserId(userId); // Assume you have this method in your repository
     }
 }

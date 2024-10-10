@@ -27,7 +27,9 @@ public class UserService {
         userRepository.save(user);
         return "User registered successfully!";
     }
-
+    public User findById(Long userId) {
+        return userRepository.findById(userId).orElse(null); // Adjust based on your repository
+    }
     public String loginUser(String email, String password) {
         try {
             Optional<User> userOpt = userRepository.findByEmail(email);
